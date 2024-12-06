@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "959719031034",
+    "project_id": "test-fire-95ca9",
+    "storage_bucket": "test-fire-95ca9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959719031034:android:c4150c1da74340a9974943",
+        "android_client_info": {
+          "package_name": "com.testfire.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB71ZRfZJVzo8D49ORUJyPgMeH_04Mmjsg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
