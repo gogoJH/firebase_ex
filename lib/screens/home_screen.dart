@@ -24,8 +24,8 @@ class HomeScreen extends StatelessWidget {
         title: const Text('할 일 목록'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => authController.signOut(),
+            icon: const Icon(Icons.settings),
+            onPressed: () => Get.toNamed('/settings'),
           ),
         ],
       ),
@@ -56,34 +56,34 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: Obx(() => ListView.builder(
-                itemCount: todoController.todos.length,
-                itemBuilder: (context, index) {
-                  final todo = todoController.todos[index];
-                  return Card(
-                    child: ListTile(
-                      leading: Checkbox(
-                        value: todo.completed,
-                        onChanged: (value) => todoController.toggleTodo(
-                          todo.id,
-                          value ?? false,
+                    itemCount: todoController.todos.length,
+                    itemBuilder: (context, index) {
+                      final todo = todoController.todos[index];
+                      return Card(
+                        child: ListTile(
+                          leading: Checkbox(
+                            value: todo.completed,
+                            onChanged: (value) => todoController.toggleTodo(
+                              todo.id,
+                              value ?? false,
+                            ),
+                          ),
+                          title: Text(
+                            todo.content,
+                            style: TextStyle(
+                              decoration: todo.completed
+                                  ? TextDecoration.lineThrough
+                                  : null,
+                            ),
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () => todoController.deleteTodo(todo.id),
+                          ),
                         ),
-                      ),
-                      title: Text(
-                        todo.content,
-                        style: TextStyle(
-                          decoration: todo.completed
-                              ? TextDecoration.lineThrough
-                              : null,
-                        ),
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () => todoController.deleteTodo(todo.id),
-                      ),
-                    ),
-                  );
-                },
-              )),
+                      );
+                    },
+                  )),
             ),
           ],
         ),

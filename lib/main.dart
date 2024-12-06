@@ -5,6 +5,7 @@ import 'package:firebase_ex/firebase_options.dart';
 import 'package:firebase_ex/screens/home_screen.dart';
 import 'package:firebase_ex/screens/login_screen.dart';
 import 'package:firebase_ex/screens/signup_screen.dart';
+import 'package:firebase_ex/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/login', page: () => LoginScreen()),
         GetPage(name: '/signup', page: () => SignupScreen()),
-        GetPage(name: '/home', page: () => HomeScreen())
+        GetPage(name: '/home', page: () => HomeScreen()),
+        GetPage(name: '/settings', page: () => SettingsScreen()),
       ],
     );
   }
