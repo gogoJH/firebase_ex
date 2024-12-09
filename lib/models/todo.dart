@@ -5,12 +5,14 @@ class TodoItem {
   final String content;
   final bool completed;
   final DateTime? createdAt;
+  final DateTime? lastCommentAt;
 
   TodoItem({
     required this.id,
     required this.content,
     required this.completed,
     this.createdAt,
+    this.lastCommentAt,
   });
 
   factory TodoItem.fromDocument(DocumentSnapshot doc) {
@@ -20,6 +22,7 @@ class TodoItem {
       content: data['content'] ?? '',
       completed: data['completed'] ?? false,
       createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
+      lastCommentAt: (data['lastCommentAt'] as Timestamp?)?.toDate(),
     );
   }
 }

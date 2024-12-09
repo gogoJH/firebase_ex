@@ -1,3 +1,3 @@
 toDolist
 
-![to do list ](./essets//images/read_me_preview.png)
+![to do list ](./assets/images/read_me_preview.png)

@@ -20,6 +20,7 @@ class TodoController extends GetxController {
       _firestore
           .collection('todos')
           .where('userId', isEqualTo: _auth.currentUser!.uid)
+          .orderBy('createdAt', descending: true)
           .snapshots()
           .listen((snapshot) {
         todos.value =
@@ -31,12 +32,17 @@ class TodoController extends GetxController {
   Future<void> addTodo(String content) async {
     if (_auth.currentUser == null) return;
 
-    await _firestore.collection('todos').add({
-      'content': content,
-      'userId': _auth.currentUser!.uid,
-      'createdAt': FieldValue.serverTimestamp(),
-      'completed': false,
-    });
+    try {
+      await _firestore.collection('todos').add({
+        'content': content,
+        'userId': _auth.currentUser!.uid,
+        'createdAt': FieldValue.serverTimestamp(),
+        'completed': false,
+      });
+    } catch (e) {
+      print('할 일 추가 실패: $e');
+      Get.snackbar('오류', '할 일을 추가하는데 실패했습니다');
+    }
   }
 
   Future<void> deleteTodo(String todoId) async {
@@ -44,8 +50,13 @@ class TodoController extends GetxController {
   }
 
   Future<void> toggleTodo(String todoId, bool completed) async {
-    await _firestore.collection('todos').doc(todoId).update({
-      'completed': completed,
-    });
+    try {
+      await _firestore.collection('todos').doc(todoId).update({
+        'completed': completed,
+      });
+    } catch (e) {
+      print('할 일 상태 변경 실패: $e');
+      Get.snackbar('오류', '할 일 상태를 변경하는데 실패했습니다');
+    }
   }
 }

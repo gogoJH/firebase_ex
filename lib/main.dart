@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ex/controllers/auth_controller.dart';
 import 'package:firebase_ex/controllers/todo_controller.dart';
+import 'package:firebase_ex/controllers/comment_controller.dart';
 import 'package:firebase_ex/firebase_options.dart';
 import 'package:firebase_ex/screens/home_screen.dart';
 import 'package:firebase_ex/screens/login_screen.dart';
 import 'package:firebase_ex/screens/signup_screen.dart';
 import 'package:firebase_ex/screens/settings_screen.dart';
+import 'package:firebase_ex/screens/todo_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +21,7 @@ void main() async {
 
   Get.put(AuthController());
   Get.put(TodoController());
+  Get.put(CommentController());
 
   runApp(const MyApp());
 }
@@ -36,6 +39,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/signup', page: () => SignupScreen()),
         GetPage(name: '/home', page: () => HomeScreen()),
         GetPage(name: '/settings', page: () => SettingsScreen()),
+        GetPage(name: '/todo-detail', page: () => TodoDetailScreen()),
       ],
     );
   }
