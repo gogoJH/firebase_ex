@@ -34,7 +34,21 @@ class CommentController extends GetxController {
   Future<void> addComment(String content) async {
     if (_auth.currentUser == null || selectedTodoId.isEmpty) return;
 
-    final userName = _auth.currentUser!.displayName ?? '익명';
+    // Firestore에서 사용자 정보 가져오기
+    final userDoc = await _firestore
+        .collection('users')
+        .doc(_auth.currentUser!.uid)
+        .get();
+
+    String userName;
+    if (_auth.currentUser!.isAnonymous) {
+      userName = '익명';
+    } else if (userDoc.exists) {
+      // users 컬렉션에서 name 필드 가져오기
+      userName = userDoc.data()?['name'] ?? _auth.currentUser!.email ?? '사용자';
+    } else {
+      userName = _auth.currentUser!.email ?? '사용자';
+    }
 
     // 트랜잭션으로 댓글 추가와 Todo 업데이트를 동시에 처리
     await _firestore.runTransaction((transaction) async {
